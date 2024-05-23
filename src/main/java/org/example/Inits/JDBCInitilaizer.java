@@ -19,8 +19,8 @@ public class JDBCInitilaizer {
     private  Map<Class<?>,List<Type>> GenericClass = new HashMap<>();
     private  Map<String,Field> fields = new HashMap<>();
 
-    public JDBCInitilaizer(){
-      var allclasses = getAllClasses();
+    public JDBCInitilaizer(String pkg){
+      var allclasses = getAllClasses(pkg);
       setupFileds(allclasses);
       var datasets = filterInterfaces_ExtemdingCRudRep(allclasses);
       fetchGenerics(datasets);
@@ -66,8 +66,8 @@ public class JDBCInitilaizer {
     }
 
 
-    private List<Class<?>> getAllClasses(){
-        Reflections reff = new Reflections("org.example",new SubTypesScanner(false));
+    private List<Class<?>> getAllClasses(String pkg){
+        Reflections reff = new Reflections(pkg,new SubTypesScanner(false));
         return  reff.getSubTypesOf(Object.class).stream().toList();
     }
 
