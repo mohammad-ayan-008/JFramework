@@ -20,10 +20,14 @@ public class HelperFunctions {
     public static boolean isparamType(Type typ){
         return typ instanceof ParameterizedType;
     }
+
     public static boolean isRawValid(Type typ,Class<?> tinterface){
         ParameterizedType type = (ParameterizedType) typ;
         Type raw = type.getRawType();
         return raw instanceof Class<?> && tinterface.isAssignableFrom((Class<?>) raw);
     }
 
+    public static boolean isClass(Class<?> clzz){
+        return  (clzz.isInterface() && clzz.isEnum() && clzz.isAnnotation());
+    }
 }

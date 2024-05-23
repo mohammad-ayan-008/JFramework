@@ -30,6 +30,13 @@ public class CrudInitializer<T,ID> implements InvocationHandler {
                         }
                         return;
                     });
+
+        if (mname.equals("save")){
+            Object Clzz = args[0];
+            System.out.println(Clzz.toString());
+            return Clzz;
+        }
+
         return null;
         }
 
