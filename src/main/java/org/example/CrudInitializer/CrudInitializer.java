@@ -17,6 +17,7 @@ public class CrudInitializer<T,ID> implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         String mname = method.getName();
         if (mname.startsWith("findBy"))
+
             GenericClass.values()
                     .forEach(arrayVal -> {
                         System.out.println(mname);
