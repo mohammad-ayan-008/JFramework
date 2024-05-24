@@ -91,7 +91,6 @@ JFramework is a lightweight Java-based framework for dependency injection and re
        public static DataInterface inf;
 
        public static void main(String[] args) {
-           new JDBCInitializer().initialize(Main.class);
            inf.findByName("Ayan");
        }
    }
