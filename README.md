@@ -14,7 +14,7 @@ JFramework is a lightweight Java-based framework for dependency injection and re
 ### Prerequisites
 
 - Java Development Kit (JDK) 8 or higher
-- Maven or Gradle for dependency management (optional but recommended)
+-  Gradle for dependency management (optional but recommended)
 
 ### Installation
 
@@ -26,12 +26,6 @@ JFramework is a lightweight Java-based framework for dependency injection and re
    ```
 
 2. **Compile the project**:
-
-   Using Maven:
-   ```sh
-   mvn clean install
-   ```
-
    Using Gradle:
    ```sh
    gradle build
