@@ -102,7 +102,7 @@ To use JFramework in your project:
 
 ### Limitations
 
-- **Currently under development**: The framework is in active development and does not yet support database operations. Database support will be added in future releases.
+- **Currently under development**: The framework is in active development and does support mongoDb database
 
 ### Contributing
 
