@@ -45,7 +45,7 @@ public class CrudInitializer<T,ID> implements InvocationHandler {
                 String json = new Gson().toJson(Clzz);
                 Document doc = Document.parse(json);
                 Initializer in = Initializer.getInstance(
-                        "mongodb+srv://mohammadayanafaq:nObewC7P2y067XSY@cluster0.bwktxd8.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0",
+                        "DATABASE",
                         "MyDatabase");
                 in.save(collection, doc);
                 System.out.println(Clzz.toString());
@@ -59,7 +59,7 @@ public class CrudInitializer<T,ID> implements InvocationHandler {
             System.out.println(clas.getName());
             if (clas.isAnnotationPresent(Entity.class)) {
                 Initializer in = Initializer.getInstance(
-                        "mongodb+srv://mohammadayanafaq:nObewC7P2y067XSY@cluster0.bwktxd8.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0",
+                        "DATABASE",
                         "MyDatabase");
                 String data =in.findALL(clas.getAnnotation(Entity.class).collection());
                 Type type =new TypeToken<List<?>>(){}.getType();
