@@ -15,6 +15,7 @@ public class Main {
     public static testInterface infs;
 
     public static void main(String[] args) {
+
          new JDBCInitilaizer("org.example");
        //  System.out.println(infs.save(new Client(2,"AYan")));
 //         System.out.println(infs.findAll(Client.class));
