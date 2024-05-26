@@ -1,5 +1,8 @@
 package org.example.TEst;
 
+import org.example.Annotations.Entity;
+
+@Entity(collection = "test")
 public class Client {
     private  int id;
     private String name;
