@@ -10,8 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CrudFactory {
-      private static List<Class<?>> interfaceClasses = new ArrayList<>();
-
+    private static List<Class<?>> interfaceClasses = new ArrayList<>();
 
     public static  <T,ID> CrudRepository<T,ID> createRepo(Map<Class<?>,List<Type>> GenericClass , Class<?> infce){
         interfaceClasses.add(infce);

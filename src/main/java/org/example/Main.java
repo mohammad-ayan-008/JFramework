@@ -10,15 +10,13 @@ import org.example.TEst.testInterface;
 
 public class Main {
 
-    @AutoConfig
-    public  static DataInterface inf;
 
     @AutoConfig
     public static testInterface infs;
 
     public static void main(String[] args) {
          new JDBCInitilaizer("org.example");
-        System.out.println(infs.save(new Client(1,"asyas")));
-
+         System.out.println(infs.save(new Client(2,"AYan")));
+         System.out.println(infs.findAll(Client.class));
     }
 }

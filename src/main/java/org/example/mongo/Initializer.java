@@ -18,9 +18,9 @@ public class Initializer{
          database = client.getDatabase(Database);
     }
 
-    private static Initializer getInstance(String connectionURL,String Database)throws Exception {
+    public static Initializer getInstance(String connectionURL,String Database)throws Exception {
         if (instance==null){
-            new Initializer(connectionURL,Database);
+            instance= new Initializer(connectionURL,Database);
         }
         return instance;
     }
@@ -28,6 +28,19 @@ public class Initializer{
     public void save(String Collection, Document doc){
          var collection = database.getCollection(Collection);
          collection.insertOne(doc);
+    }
+
+    public String findALL(String Collection){
+        var collection = database.getCollection(Collection);
+        var cursor = collection.find().cursor();
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+        while (cursor.hasNext()){
+            builder.append(cursor.next().toJson());
+        }
+        builder.append("]");
+        return builder.toString();
+
     }
 
 }

@@ -6,5 +6,5 @@ public interface CrudRepository <T,ID>{
     T save(T element);
     boolean deleteAll();
     boolean deleteByID();
-    List<T> findAll();
+    List<T> findAll(Class<?> cls);
 }
