@@ -26,7 +26,6 @@ public class JDBCInitilaizer {
       fetchGenerics(datasets);
         GenericClass.forEach((parentClass,genericList)->{
             Object clzz= (Object) CrudFactory.createRepo(GenericClass,parentClass);
-            System.out.println(parentClass);
             Field field = fields.get(parentClass.getName());
             if (field != null){
                 try {

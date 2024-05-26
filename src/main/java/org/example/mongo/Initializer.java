@@ -4,7 +4,10 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import org.bson.BsonDocument;
 import org.bson.Document;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.conversions.Bson;
 
 public class Initializer{
 
@@ -37,9 +40,18 @@ public class Initializer{
         builder.append("[");
         while (cursor.hasNext()){
             builder.append(cursor.next().toJson());
+            if(cursor.hasNext()){
+                builder.append(",");
+            }
         }
         builder.append("]");
         return builder.toString();
+    }
+
+    public String FindBy(String Collection,String QueryString,Object value){
+        var collection = database.getCollection(Collection);
+        Document doc = new Document().append(QueryString,value);
+        return collection.find(doc).cursor().next().toJson();
 
     }
 

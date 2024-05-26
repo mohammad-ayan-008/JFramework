@@ -16,7 +16,9 @@ public class Main {
 
     public static void main(String[] args) {
          new JDBCInitilaizer("org.example");
-         System.out.println(infs.save(new Client(2,"AYan")));
-         System.out.println(infs.findAll(Client.class));
+       //  System.out.println(infs.save(new Client(2,"AYan")));
+//         System.out.println(infs.findAll(Client.class));
+        System.out.println(infs.findClientById(1));
+        System.out.println(infs.findClientByName("AYan"));
     }
 }
