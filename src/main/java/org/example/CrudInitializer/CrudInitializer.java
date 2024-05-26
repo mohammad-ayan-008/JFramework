@@ -47,6 +47,7 @@ public class CrudInitializer<T,ID> implements InvocationHandler {
                 Initializer in = Initializer.getInstance(
                         "DATABASE",
                         "MyDatabase");
+
                 in.save(collection, doc);
                 System.out.println(Clzz.toString());
             } else {
