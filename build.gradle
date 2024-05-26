@@ -13,6 +13,8 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     implementation 'org.reflections:reflections:0.9.12'
+    implementation 'org.mongodb:mongo-java-driver:3.12.14'
+    implementation 'com.google.code.gson:gson:2.8.9'
 }
 
 test {

@@ -1,5 +1,8 @@
 package org.example.TEst;
 
+import org.example.Annotations.Entity;
+
+@Entity(collection = "user")
 public class USER {
     private  int id;
     private String name;
@@ -18,6 +21,14 @@ public class USER {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "USER{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     public USER(int id, String name) {

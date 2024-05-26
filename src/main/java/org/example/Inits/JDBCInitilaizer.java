@@ -1,11 +1,13 @@
 package org.example.Inits;
 
+import org.example.Annotations.AutoConfig;
 import org.example.CrudInitializer.CrudFactory;
 import org.example.Main;
 import org.reflections.Reflections;
 import org.reflections.scanners.SubTypesScanner;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
@@ -15,21 +17,41 @@ import java.util.Map;
 
 public class JDBCInitilaizer {
     private  Map<Class<?>,List<Type>> GenericClass = new HashMap<>();
+    private  Map<String,Field> fields = new HashMap<>();
 
-    public JDBCInitilaizer(){
-      var datasets = filterInterfaces_ExtemdingCRudRep(getAllClasses());
+    public JDBCInitilaizer(String pkg){
+      var allclasses = getAllClasses(pkg);
+      setupFileds(allclasses);
+      var datasets = filterInterfaces_ExtemdingCRudRep(allclasses);
       fetchGenerics(datasets);
         GenericClass.forEach((parentClass,genericList)->{
             Object clzz= (Object) CrudFactory.createRepo(GenericClass,parentClass);
-                Class<?> clss = Main.class;
+            System.out.println(parentClass);
+            Field field = fields.get(parentClass.getName());
+            if (field != null){
                 try {
-                    Field f = clss.getDeclaredField("inf");
-                    f.set(clss.newInstance(), clzz);
-                } catch (Exception e) {
-
+                    field.set(field.getDeclaringClass().newInstance(),clzz);
+                } catch (IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                } catch (InstantiationException e) {
+                    throw new RuntimeException(e);
                 }
+            }
+            System.out.println(field);
+
         });
 
+    }
+
+    private void setupFileds(List<Class<?>> list) {
+       list.parallelStream()
+               .forEach(clas->{
+                    Arrays.stream(clas.getDeclaredFields())
+                            .filter(x->x.isAnnotationPresent(AutoConfig.class))
+                            .forEach(field -> {
+                                fields.put(field.getType().getName(),field);
+                            });
+               });
     }
 
     private void fetchGenerics(List<Class<?>> clzz){
@@ -44,8 +66,8 @@ public class JDBCInitilaizer {
     }
 
 
-    private List<Class<?>> getAllClasses(){
-        Reflections reff = new Reflections("org.example",new SubTypesScanner(false));
+    private List<Class<?>> getAllClasses(String pkg){
+        Reflections reff = new Reflections(pkg,new SubTypesScanner(false));
         return  reff.getSubTypesOf(Object.class).stream().toList();
     }
 
