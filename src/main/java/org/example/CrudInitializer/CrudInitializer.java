@@ -50,6 +50,20 @@ public class CrudInitializer<T,ID> implements InvocationHandler {
                             }
                         }
         }
+        if (mname.equals("deleteByObject")){
+            Class<?> clas =(Class<?>) args[0].getClass();
+            System.out.println(clas.getName());
+            if (clas.isAnnotationPresent(Entity.class)) {
+                Field f = clas.getDeclaredField("id");
+                f.setAccessible(true);
+                Object value_param=f.get(args[0]);
+                System.out.println(value_param);
+                return in.DeleteByID(clas.getAnnotation(Entity.class).collection(),"id",value_param);
+            }else{
+                System.out.println(clas.getName()+" Not an Entity Class");
+                return false;
+            }
+        }
         if (mname.equals("save")) {
             Object Clzz = args[0];
             Class<?> clazz = Clzz.getClass();
@@ -80,6 +94,7 @@ public class CrudInitializer<T,ID> implements InvocationHandler {
                 System.out.println(clas.getName()+" Not an Entity Class");
             }
         }
+
         return null;
         }
 

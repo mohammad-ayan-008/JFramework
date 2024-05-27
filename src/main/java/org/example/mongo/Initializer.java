@@ -52,7 +52,11 @@ public class Initializer{
         var collection = database.getCollection(Collection);
         Document doc = new Document().append(QueryString,value);
         return collection.find(doc).cursor().next().toJson();
-
+    }
+    public boolean DeleteByID(String Collection,String QueryString,Object value){
+        var collection = database.getCollection(Collection);
+        Document doc = new Document().append(QueryString,value);
+        return collection.findOneAndDelete(doc) != null;
     }
 
 }
